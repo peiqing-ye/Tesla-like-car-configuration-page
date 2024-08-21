@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Model 3 Configuration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8">Model 3</h1>
+        
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full md:w-1/2 px-4 mb-8">
+                <img src="https://via.placeholder.com/600x400" alt="Tesla Model 3" class="w-full rounded-lg shadow-lg">
+            </div>
+            
+            <div class="w-full md:w-1/2 px-4">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-semibold mb-4">Configure Your Model 3</h2>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="variant">
+                            Variant
+                        </label>
+                        <select id="variant" class="w-full px-3 py-2 border rounded-lg">
+                            <option value="standard">Standard Range Plus - $39,990</option>
+                            <option value="longrange">Long Range - $48,990</option>
+                            <option value="performance">Performance - $56,990</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="color">
+                            Color
+                        </label>
+                        <select id="color" class="w-full px-3 py-2 border rounded-lg">
+                            <option value="white">Pearl White Multi-Coat - Included</option>
+                            <option value="black">Solid Black - $1,000</option>
+                            <option value="blue">Deep Blue Metallic - $1,000</option>
+                            <option value="red">Red Multi-Coat - $2,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="wheels">
+                            Wheels
+                        </label>
+                        <select id="wheels" class="w-full px-3 py-2 border rounded-lg">
+                            <option value="aero">18" Aero Wheels - Included</option>
+                            <option value="sport">19" Sport Wheels - $1,500</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="interior">
+                            Interior
+                        </label>
+                        <select id="interior" class="w-full px-3 py-2 border rounded-lg">
+                            <option value="black">All Black - Included</option>
+                            <option value="white">Black and White - $1,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="autopilot" class="form-checkbox">
+                            <span class="ml-2">Full Self-Driving Capability - $10,000</span>
+                        </label>
+                    </div>
+                    
+                    <div class="text-2xl font-bold mb-4">
+                        Total: $<span id="total">39,990</span>
+                    </div>
+                    
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Order Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const variantSelect = document.getElementById('variant');
+        const colorSelect = document.getElementById('color');
+        const wheelsSelect = document.getElementById('wheels');
+        const interiorSelect = document.getElementById('interior');
+        const autopilotCheckbox = document.getElementById('autopilot');
+        const totalSpan = document.getElementById('total');
+
+        function updateTotal() {
+            let total = 39990; // Base price
+
+            if (variantSelect.value === 'longrange') total += 9000;
+            if (variantSelect.value === 'performance') total += 17000;
+
+            if (colorSelect.value === 'black' || colorSelect.value === 'blue') total += 1000;
+            if (colorSelect.value === 'red') total += 2000;
+
+            if (wheelsSelect.value === 'sport') total += 1500;
+
+            if (interiorSelect.value === 'white') total += 1000;
+
+            if (autopilotCheckbox.checked) total += 10000;
+
+            totalSpan.textContent = total.toLocaleString();
+        }
+
+        variantSelect.addEventListener('change', updateTotal);
+        colorSelect.addEventListener('change', updateTotal);
+        wheelsSelect.addEventListener('change', updateTotal);
+        interiorSelect.addEventListener('change', updateTotal);
+        autopilotCheckbox.addEventListener('change', updateTotal);
+    </script>
+</body>
+</html>
